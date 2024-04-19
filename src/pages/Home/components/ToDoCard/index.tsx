@@ -1,24 +1,28 @@
 import {useNavigation} from '@react-navigation/native'
-import React from 'react'
-import {Text} from 'react-native'
-import {NavigationProps, TodoItem} from '../../../types'
+import React, { useContext } from 'react'
+import {NavigationProps, StatusEnum, TodoItem} from '../../../types'
 import {
   Container,
+  Description,
+  Status,
+  StatusCircle,
+  StatusContainer,
   Title,
   TodoItemAction,
   TodoItemActionText,
   TodoItemActions,
   TodoItemInfo,
 } from './styles'
+import { ToDoListContext } from '../../../../contexts/toDoList'
 
 type ToDoCardProps = {
-  todoItem: TodoItem,
-  removeItem: (item: TodoItem) => void,
+  todoItem: TodoItem
+  removeItem: (item: TodoItem) => void
 }
 
 export const ToDoCard = ({todoItem, removeItem}: ToDoCardProps) => {
+  const { updateTodoItem } = useContext(ToDoListContext)
   const navigate = useNavigation<NavigationProps>()
-  console.log({ todoItem })
   const handleEdit = () => {
     navigate.navigate('Details', {
       todoItem,
@@ -29,19 +33,36 @@ export const ToDoCard = ({todoItem, removeItem}: ToDoCardProps) => {
     removeItem(todoItem)
   }
 
+  const handleStatusCircleClick = () => {
+    updateTodoItem({
+      ...todoItem,
+      status: todoItem.status === StatusEnum.PENDING ? StatusEnum.DONE : StatusEnum.PENDING
+    })
+  }
+
   return (
-    <Container>
+    <Container
+      onPress={handleEdit}
+    >
       <TodoItemInfo>
         <Title>{todoItem.title}</Title>
-        <Text>{todoItem.description}</Text>
-        <Text>{todoItem.status}</Text>
+        <Description>{todoItem.description}</Description>
+        <StatusContainer>
+          <StatusCircle 
+            isCompleted={todoItem.status === StatusEnum.DONE}
+            onPress={handleStatusCircleClick}
+          />
+          <Status>{todoItem.status}</Status>
+        </StatusContainer>
       </TodoItemInfo>
       <TodoItemActions>
         <TodoItemAction>
           <TodoItemActionText onPress={handleEdit}>Editar</TodoItemActionText>
         </TodoItemAction>
-        <TodoItemAction>
-          <TodoItemActionText>Excluir</TodoItemActionText>
+        <TodoItemAction color="warn">
+          <TodoItemActionText onPress={handleRemove}>
+            Excluir
+          </TodoItemActionText>
         </TodoItemAction>
       </TodoItemActions>
     </Container>

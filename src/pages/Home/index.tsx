@@ -1,4 +1,5 @@
 import React from 'react'
+import {ToDoListContext} from '../../contexts/toDoList'
 import {StatusEnum, TodoItem} from '../types'
 import {ToDoCard} from './components/ToDoCard'
 import {
@@ -11,26 +12,27 @@ import {
 } from './styles'
 
 export const Home = () => {
+  const {todoList, addTodoItem, removeTodoItem} =
+    React.useContext(ToDoListContext)
   const [todoTitleInputText, setTodoTitleInputText] = React.useState('')
-  const [todoList, setTodoList] = React.useState<TodoItem[]>([])
 
-  const handleAddTodo = () => {
+  function handleAddTodo() {
     if (!todoTitleInputText) {
       return
     }
-    const newTodoItem: TodoItem = {
+
+    addTodoItem({
+      id: new Date().getTime().toString(),
       title: todoTitleInputText,
       description: '',
       status: StatusEnum.PENDING,
-    }
+    })
 
-    setTodoList([...todoList, newTodoItem])
     setTodoTitleInputText('')
   }
 
-  const handleRemoveTodo = (todoItem: TodoItem) => {
-    const newTodoList = todoList.filter(item => item.title !== todoItem.title)
-    setTodoList(newTodoList)
+  function handleRemoveTodo(todoItem: TodoItem) {
+    removeTodoItem(todoItem)
   }
 
   return (
@@ -40,6 +42,7 @@ export const Home = () => {
           placeholder="Digite o título da tarefa"
           value={todoTitleInputText}
           onChangeText={setTodoTitleInputText}
+          onSubmitEditing={handleAddTodo}
         />
         <AddButton onPress={handleAddTodo}>
           <ButtonText>+</ButtonText>

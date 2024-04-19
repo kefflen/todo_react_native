@@ -6,6 +6,7 @@ export enum StatusEnum {
 }
 
 export type TodoItem = {
+  id: string
   title: string
   description: string
   status: StatusEnum

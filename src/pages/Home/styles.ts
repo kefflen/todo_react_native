@@ -2,6 +2,7 @@ import styled from 'styled-components/native'
 
 export const Container = styled.View`
   flex: 1;
+  background-color: ${({ theme }) => theme.colors.secondary};
 `
 
 export const InputContainer = styled.View`
@@ -14,13 +15,15 @@ export const InputContainer = styled.View`
 export const Input = styled.TextInput`
   flex: 1;
   height: 40px;
-  border: 1px solid #333;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.textOnSecondary};
+  color: black;
   border-radius: 4px;
   padding: 0 8px;
 `
 
 export const AddButton = styled.TouchableOpacity`
-  background-color: #333;
+  background-color: ${({theme}) => theme.colors.primary};
   height: 40px;
   width: 40px;
   border-radius: 4px;
@@ -30,7 +33,7 @@ export const AddButton = styled.TouchableOpacity`
 `
 
 export const ButtonText = styled.Text`
-  color: #fff;
+  color: ${({ theme }) => theme.colors.textOnPrimary};
   font-size: 20px;
 `
 

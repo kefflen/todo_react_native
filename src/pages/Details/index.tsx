@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
+import {ToDoListContext} from '../../contexts/toDoList'
 import {RoutesProps} from '../types'
 import {
   ActionsContainer,
@@ -10,24 +11,26 @@ import {
   SaveActionText,
 } from './styles'
 
-export const Details = ({
-  route: {todoItem, onTodoItemChange},
-  ...rest
-}: {
-  route: RoutesProps['Details']
-}) => {
-  console.log(todoItem)
-  console.log(rest)
+type DetailsProps = {
+  navigation: any,
+  route: {
+    params: RoutesProps['Details']
+  },
+}
 
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+export const Details = ({route, navigation}: DetailsProps) => {
+  const {params} = route
+  const {updateTodoItem} = useContext(ToDoListContext)
+  const [title, setTitle] = useState(params.todoItem.title)
+  const [description, setDescription] = useState(params.todoItem.description)
 
   const handleSave = () => {
-    onTodoItemChange({
-      ...todoItem,
+    updateTodoItem({
+      ...params.todoItem,
       title,
       description,
     })
+    navigation.goBack()
   }
 
   return (
