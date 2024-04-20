@@ -1,4 +1,5 @@
 import {useNavigation} from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import React, {useContext} from 'react'
 import {ToDoListContext} from '../../../../contexts/toDoList'
 import {NavigationProps, StatusEnum, TodoItem} from '../../../types'
@@ -63,11 +64,13 @@ export const ToDoCard = ({todoItem, removeItem}: ToDoCardProps) => {
       </TodoItemInfo>
       <TodoItemActions>
         <TodoItemAction>
-          <TodoItemActionText onPress={handleEdit}>Editar</TodoItemActionText>
+          <TodoItemActionText onPress={handleEdit}>
+            <Icon name="edit" size={16} color="#fff" />
+          </TodoItemActionText>
         </TodoItemAction>
         <TodoItemAction color="warn">
           <TodoItemActionText onPress={handleRemove}>
-            Excluir
+            <Icon name="delete" size={16} color="#fff" />
           </TodoItemActionText>
         </TodoItemAction>
       </TodoItemActions>

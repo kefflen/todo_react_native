@@ -15,7 +15,8 @@ export const TodoItemInfo = styled.View`
 
 export const TodoItemActions = styled.View`
   padding: 8px;
-`
+  align-items: center;
+  justify-content: center;`
 
 type TodoItemActionProps = {
   color?: 'primary' | 'warn'

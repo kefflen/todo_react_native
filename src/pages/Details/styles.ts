@@ -47,6 +47,7 @@ export const SaveActionText = styled.Text`
 export const StatusContainer = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-top: 16px;
 `
 
 export const Status = styled.Text`

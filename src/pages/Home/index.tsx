@@ -10,6 +10,7 @@ import {
   InputContainer,
   ToDoList,
 } from './styles'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export const Home = () => {
   const {todoList, addTodoItem, removeTodoItem} =
@@ -45,7 +46,9 @@ export const Home = () => {
           onSubmitEditing={handleAddTodo}
         />
         <AddButton onPress={handleAddTodo}>
-          <ButtonText>+</ButtonText>
+          <ButtonText>
+            <Icon name="add" size={24} color="#fff" />
+          </ButtonText>
         </AddButton>
       </InputContainer>
       <ToDoList
