@@ -68,7 +68,7 @@ export const Details = ({route, navigation}: DetailsProps) => {
       </FormContainer>
       <ActionsContainer>
         <SaveAction onPress={handleSave}>
-          <SaveActionText>Save</SaveActionText>
+          <SaveActionText>Salvar</SaveActionText>
         </SaveAction>
       </ActionsContainer>
     </Container>

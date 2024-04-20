@@ -34,7 +34,7 @@ export default function Routes() {
           component={Home}
           options={{
             ...basicScreanOptions,
-            title: 'Home',
+            title: 'Pagina inicial',
           }}
         />
         <Stack.Screen
@@ -42,7 +42,7 @@ export default function Routes() {
           component={Details as any}
           options={{
             ...basicScreanOptions,
-            title: 'Details',
+            title: 'Detalhes',
           }}
         />
       </Stack.Navigator>
