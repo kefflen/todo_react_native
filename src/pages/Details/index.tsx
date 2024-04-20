@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react'
+import {StyleSheet} from 'react-native'
 import {ToDoListContext} from '../../contexts/toDoList'
 import {RoutesProps, StatusEnum} from '../types'
 import {
@@ -50,7 +51,13 @@ export const Details = ({route, navigation}: DetailsProps) => {
         <Label>Title</Label>
         <Input value={title} onChangeText={setTitle} />
         <Label>Description</Label>
-        <Input value={description} onChangeText={setDescription} />
+        <Input
+          style={NativeStyles.TextInputArea}
+          numberOfLines={7}
+          multiline
+          value={description}
+          onChangeText={setDescription}
+        />
         <StatusContainer>
           <StatusCheck
             isCompleted={status === StatusEnum.DONE}
@@ -67,3 +74,9 @@ export const Details = ({route, navigation}: DetailsProps) => {
     </Container>
   )
 }
+
+const NativeStyles = StyleSheet.create({
+  TextInputArea: {
+    textAlignVertical: 'top',
+  },
+})

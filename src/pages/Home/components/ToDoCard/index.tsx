@@ -50,7 +50,7 @@ export const ToDoCard = ({todoItem, removeItem}: ToDoCardProps) => {
       <TodoItemInfo>
         <Title>{todoItem.title}</Title>
         {todoItem.description ? (
-          <Description>{todoItem.description}</Description>
+          <Description numberOfLines={2}>{todoItem.description}</Description>
         ) : (
           <EmptyDescriptionMessage>Descrição não informada</EmptyDescriptionMessage>
         )}
