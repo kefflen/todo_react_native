@@ -48,9 +48,9 @@ export const Details = ({route, navigation}: DetailsProps) => {
   return (
     <Container>
       <FormContainer>
-        <Label>Title</Label>
+        <Label>Titulo</Label>
         <Input value={title} onChangeText={setTitle} />
-        <Label>Description</Label>
+        <Label>Descrição</Label>
         <Input
           style={NativeStyles.TextInputArea}
           numberOfLines={7}
