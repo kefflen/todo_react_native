@@ -55,7 +55,7 @@ export const Home = () => {
             item: item as any,
           })
         }
-        keyExtractor={item => (item as any).title}
+        keyExtractor={item => (item as any).id}
       />
     </Container>
   )

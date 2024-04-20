@@ -5,6 +5,7 @@ export const Container = styled.TouchableOpacity`
   border-radius: 4px;
   margin-top: 8px;
   flex-direction: row;
+  background-color: ${({ theme }) => theme.colors.paper};
 `
 
 export const TodoItemInfo = styled.View`
@@ -13,7 +14,9 @@ export const TodoItemInfo = styled.View`
 `
 
 export const TodoItemActions = styled.View`
+  padding: 8px;
 `
+
 type TodoItemActionProps = {
   color?: 'primary' | 'warn'
 }
@@ -44,9 +47,17 @@ export const Description = styled.Text`
   margin-top: 8px;
 `
 
+export const EmptyDescriptionMessage = styled.Text`
+  color: ${({ theme }) => theme.colors.textOnSecondary};
+  opacity: 0.4;
+  font-size: 16px;
+  margin-top: 8px;
+`
+
 export const StatusContainer = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-top: 16px;
 `
 
 export const Status = styled.Text`
@@ -58,10 +69,10 @@ type StatusCircleProps = {
   isCompleted?: boolean
 }
 
-export const StatusCircle = styled.TouchableOpacity<StatusCircleProps>`
+export const StatusCheck = styled.TouchableOpacity<StatusCircleProps>`
   height: 20px;
   width: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: ${({ theme, isCompleted }) => isCompleted ? theme.colors.completed : theme.colors.secondary};
   border: 2px solid ${({ theme, isCompleted }) => isCompleted ? theme.colors.completed : theme.colors.pending};
 `

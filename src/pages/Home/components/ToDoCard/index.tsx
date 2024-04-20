@@ -1,11 +1,13 @@
 import {useNavigation} from '@react-navigation/native'
-import React, { useContext } from 'react'
+import React, {useContext} from 'react'
+import {ToDoListContext} from '../../../../contexts/toDoList'
 import {NavigationProps, StatusEnum, TodoItem} from '../../../types'
 import {
   Container,
   Description,
+  EmptyDescriptionMessage,
   Status,
-  StatusCircle,
+  StatusCheck,
   StatusContainer,
   Title,
   TodoItemAction,
@@ -13,7 +15,6 @@ import {
   TodoItemActions,
   TodoItemInfo,
 } from './styles'
-import { ToDoListContext } from '../../../../contexts/toDoList'
 
 type ToDoCardProps = {
   todoItem: TodoItem
@@ -21,7 +22,7 @@ type ToDoCardProps = {
 }
 
 export const ToDoCard = ({todoItem, removeItem}: ToDoCardProps) => {
-  const { updateTodoItem } = useContext(ToDoListContext)
+  const {updateTodoItem} = useContext(ToDoListContext)
   const navigate = useNavigation<NavigationProps>()
   const handleEdit = () => {
     navigate.navigate('Details', {
@@ -36,19 +37,24 @@ export const ToDoCard = ({todoItem, removeItem}: ToDoCardProps) => {
   const handleStatusCircleClick = () => {
     updateTodoItem({
       ...todoItem,
-      status: todoItem.status === StatusEnum.PENDING ? StatusEnum.DONE : StatusEnum.PENDING
+      status:
+        todoItem.status === StatusEnum.PENDING
+          ? StatusEnum.DONE
+          : StatusEnum.PENDING,
     })
   }
 
   return (
-    <Container
-      onPress={handleEdit}
-    >
+    <Container onPress={handleEdit}>
       <TodoItemInfo>
         <Title>{todoItem.title}</Title>
-        <Description>{todoItem.description}</Description>
+        {todoItem.description ? (
+          <Description>{todoItem.description}</Description>
+        ) : (
+          <EmptyDescriptionMessage>Descrição não informada</EmptyDescriptionMessage>
+        )}
         <StatusContainer>
-          <StatusCircle 
+          <StatusCheck
             isCompleted={todoItem.status === StatusEnum.DONE}
             onPress={handleStatusCircleClick}
           />

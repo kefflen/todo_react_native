@@ -3,6 +3,7 @@ export const theme = {
   colors: {
     primary: '#84cc16',
     secondary: '#0f172a',
+    paper: '#1e293b',
     textOnPrimary: '#f1f5f9',
     textOnSecondary: '#f1f5f9',
     border: '#334155',

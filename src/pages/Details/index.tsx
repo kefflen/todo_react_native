@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {ToDoListContext} from '../../contexts/toDoList'
-import {RoutesProps} from '../types'
+import {RoutesProps, StatusEnum} from '../types'
 import {
   ActionsContainer,
   Container,
@@ -9,13 +9,16 @@ import {
   Label,
   SaveAction,
   SaveActionText,
+  Status,
+  StatusCheck,
+  StatusContainer,
 } from './styles'
 
 type DetailsProps = {
-  navigation: any,
+  navigation: any
   route: {
     params: RoutesProps['Details']
-  },
+  }
 }
 
 export const Details = ({route, navigation}: DetailsProps) => {
@@ -23,14 +26,22 @@ export const Details = ({route, navigation}: DetailsProps) => {
   const {updateTodoItem} = useContext(ToDoListContext)
   const [title, setTitle] = useState(params.todoItem.title)
   const [description, setDescription] = useState(params.todoItem.description)
+  const [status, setStatus] = useState(params.todoItem.status)
 
   const handleSave = () => {
     updateTodoItem({
-      ...params.todoItem,
       title,
       description,
+      status,
+      id: params.todoItem.id,
     })
     navigation.goBack()
+  }
+
+  const handleStatusCircleClick = () => {
+    setStatus(
+      status === StatusEnum.PENDING ? StatusEnum.DONE : StatusEnum.PENDING,
+    )
   }
 
   return (
@@ -40,6 +51,13 @@ export const Details = ({route, navigation}: DetailsProps) => {
         <Input value={title} onChangeText={setTitle} />
         <Label>Description</Label>
         <Input value={description} onChangeText={setDescription} />
+        <StatusContainer>
+          <StatusCheck
+            isCompleted={status === StatusEnum.DONE}
+            onPress={handleStatusCircleClick}
+          />
+          <Status>{status}</Status>
+        </StatusContainer>
       </FormContainer>
       <ActionsContainer>
         <SaveAction onPress={handleSave}>

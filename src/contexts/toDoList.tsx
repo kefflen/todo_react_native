@@ -1,4 +1,5 @@
-import React, {createContext} from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, {createContext, useEffect} from 'react'
 import {TodoItem} from '../pages/types'
 
 type contextvalue = {
@@ -14,6 +15,21 @@ export const ToDoListContext = createContext<contextvalue>({} as contextvalue)
 
 function ToDoListProvider({children}: {children: React.ReactNode}) {
   const [todoList, setTodoList] = React.useState<TodoItem[]>([])
+
+  useEffect(() => {
+    const getTodoList = async () => {
+      const todoListJson = await AsyncStorage.getItem('todoList')
+      if (todoListJson) {
+        setTodoList(JSON.parse(todoListJson))
+      }
+    }
+    getTodoList()
+  }, [])
+
+  useEffect(() => {
+    AsyncStorage.setItem('todoList', JSON.stringify(todoList))
+  }, [todoList])
+
   const addTodoItem = (todoItem: TodoItem) => {
     setTodoList([...todoList, todoItem])
   }

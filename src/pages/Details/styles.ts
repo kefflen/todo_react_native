@@ -44,3 +44,24 @@ export const SaveActionText = styled.Text`
   color: ${({ theme,
   }) => theme.colors.textOnPrimary};
 `
+export const StatusContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
+
+export const Status = styled.Text`
+  margin-left: 8px;
+  color: ${({ theme }) => theme.colors.textOnSecondary};
+  font-size: 16px;
+`
+type StatusCircleProps = {
+  isCompleted?: boolean
+}
+
+export const StatusCheck = styled.TouchableOpacity<StatusCircleProps>`
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  background-color: ${({ theme, isCompleted }) => isCompleted ? theme.colors.completed : theme.colors.secondary};
+  border: 2px solid ${({ theme, isCompleted }) => isCompleted ? theme.colors.completed : theme.colors.pending};
+`

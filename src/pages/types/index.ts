@@ -1,8 +1,8 @@
 export * from './NavigationProps'
 
 export enum StatusEnum {
-  PENDING = 'PENDING',
-  DONE = 'DONE'
+  PENDING = 'Pendente',
+  DONE = 'Completo'
 }
 
 export type TodoItem = {
